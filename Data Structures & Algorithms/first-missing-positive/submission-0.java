@@ -1,0 +1,29 @@
+class Solution {
+    public int firstMissingPositive(int[] nums) {
+        int n = nums.length;
+        for (int i=0; i<n; i++) {
+            while (nums[i] > 0 && nums[i] <= n && nums[nums[i]-1] != nums[i]) {
+                int correctIndex = nums[i] - 1;
+                int temp = nums[correctIndex];
+                nums[correctIndex] = nums[i];
+                nums[i] = temp;
+            }
+        }
+
+        for (int i=0; i<nums.length; i++) {
+            if (nums[i] != i+1) {
+                return i+1;
+            }
+        }
+
+        return n+1;
+    }
+
+    public void swap(int[] nums, int x, int y) {
+        int temp = nums[x];
+        nums[x] = nums[y];
+        nums[y] = temp;
+    }
+}
+
+// -1,1,3,4
